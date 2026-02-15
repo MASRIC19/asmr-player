@@ -36,7 +36,7 @@ class WorkCard(ft.Container):
                     ft.Container(
                         content=ft.Image(
                             src=cover_url,
-                            fit="cover",
+                            fit=ft.ImageFit.COVER,
                             border_radius=ft.border_radius.only(
                                 top_left=12, top_right=12
                             ),

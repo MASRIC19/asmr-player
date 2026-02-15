@@ -85,7 +85,7 @@ class DetailPage(ft.Column):
             ft.Container(
                 content=ft.Image(
                     src=cover_url,
-                    fit="cover",
+                    fit=ft.ImageFit.COVER,
                     border_radius=16,
                     error_content=ft.Container(
                         content=ft.Icon(ft.Icons.IMAGE_NOT_SUPPORTED, size=60, color=ft.Colors.GREY_400),

@@ -1,4 +1,7 @@
 import flet as ft
+import flet_audio as fta
+
+
 class AudioPlayer(ft.Container):
     """底部音频播放条"""
 
@@ -74,7 +77,7 @@ class AudioPlayer(ft.Container):
         """确保 Audio Service 已创建（必须在 page 上下文中）"""
         if self.audio is not None:
             return
-        self.audio = ft.Audio(
+        self.audio = fta.Audio(
             src="",
             autoplay=False,
             on_position_changed=self._on_position_change,
