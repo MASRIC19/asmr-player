@@ -93,26 +93,42 @@ async def main(page: ft.Page):
     )
 
     # ── 整体布局 ──────────────────────────────────────
-    page.add(
-        ft.Stack(
-            controls=[
-                # 主内容
-                content_area,
-                # 底部播放器（浮在 nav_bar 上方）
-                ft.Container(
-                    content=audio_player,
-                    bottom=80,
-                    left=0,
-                    right=0,
-                ),
-            ],
-            expand=True,
-        ),
-    )
-    page.navigation_bar = nav_bar
+    try:
+        page.add(
+            ft.Stack(
+                controls=[
+                    # 主内容
+                    content_area,
+                    # 底部播放器（浮在 nav_bar 上方）
+                    ft.Container(
+                        content=audio_player,
+                        bottom=80,
+                        left=0,
+                        right=0,
+                    ),
+                ],
+                expand=True,
+            ),
+        )
+        page.navigation_bar = nav_bar
 
-    # ── 初始加载 ──────────────────────────────────────
-    await home_page.load_data()
+        # ── 初始加载 ──────────────────────────────────────
+        await home_page.load_data()
+    except Exception as e:
+        page.clean()
+        page.add(
+            ft.Column(
+                controls=[
+                    ft.Icon(ft.Icons.ERROR_OUTLINE, color=ft.Colors.RED, size=50),
+                    ft.Text("启动出错", size=24, color=ft.Colors.RED),
+                    ft.Text(f"Error: {e}", size=16),
+                    ft.Text(f"Type: {type(e)}", size=14, color=ft.Colors.GREY),
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            )
+        )
+        page.update()
 
 
 # ── 启动 ──────────────────────────────────────────────
